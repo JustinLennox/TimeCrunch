@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--TimeCrunch-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="TimeCrunch" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HeB-Ug-avT"/>
+                    <navigationItem key="navigationItem" title="TimeCrunch" id="HeB-Ug-avT"/>
                     <connections>
-                        <segue destination="DG0-Ts-5ax" kind="show" identifier="AddActivitySegue" id="hf6-9t-1ab"/>
+                        <segue destination="DG0-Ts-5ax" kind="presentation" identifier="AddActivitySegue" id="hf6-9t-1ab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -38,7 +38,7 @@
                     <view key="view" contentMode="scaleToFill" id="sb8-y4-wSY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.17254901959999999" green="0.7843137255" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.090196078430000007" green="0.69019607839999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r53-8F-qeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -53,6 +53,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yz2-g6-A52">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.090196078430000007" green="0.69019607839999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
