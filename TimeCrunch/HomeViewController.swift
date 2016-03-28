@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     //All of the things we only need to do once
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        AddUI()
     }
     
     //MARK: - UI
@@ -64,25 +64,80 @@ class HomeViewController: UIViewController {
         performSegueWithIdentifier("AddActivitySegue", sender: self)
     }
     
+    //MARK: - Timing Activities
+    
+    /**
+    Called when we press the main timer button in the center of the screen. Starts timing the activity
+    if we're not already, or stops timing it if we are.
+    */
     func TimerPressed(){
         timerButton.backgroundColor = UIColor.whiteColor()
-        if(!timing){
+        if(!timing){    //Start timing the activity
             timing = true
             StartActivity()
-        }else{
+        }else{  //Stop timing the activity
             timing = false
             StopActivity()
         }
     }
     
+    /**
+    Starts timing the activity
+    */
     func StartActivity(){
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "IncrementTime", userInfo: nil, repeats: true)
+        timerLabel.textColor = UIColor.TimeCrunchBlue()
+        ChangeRingToTiming()
+    }
+    
+    /**
+    Stops timing the activity
+    */
+    func StopActivity(){
+        timer.invalidate()
+        timerLabel.textColor = UIColor.TimeCrunchOrange()
+        ChangeRingToStopped()
+    }
+    
+    /**
+    Called every second while we're timing an activity. Updates UI and time
+    */
+    func IncrementTime(){
+        timerSeconds++
+        ring.animateStroke(timerSeconds)
+        //Make the minutes into a displayable version (i.e. 09 instead of 9)
+        let timerMinutes = timerSeconds / 60
+        var minutesString = "\(timerMinutes)"
+        if(timerMinutes < 10){
+            minutesString = "0\(minutesString)"
+        }
+        
+        //Make the seconds into a displayable version (i.e. 09 instead of 9)
+        let secondsMinusMinutes = timerSeconds % 60
+        var secondsString = "\(secondsMinusMinutes)"
+        if(secondsMinusMinutes < 10){
+            secondsString = "0\(secondsMinusMinutes)"
+        }
+        timerLabel.text = "\(minutesString):\(secondsString)"   //Combines the minutes and seconds to look like "09:45"
+    }
+    
+    /**
+    Called when we press down on the timer just to show touch down
+    */
+    func TimerDown(){
+       timerButton.backgroundColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0 , alpha: 1.0)
+    }
+    
+    //MARK: - Ring Methods
+    
+    /**
+    Changes the ring's UI to show that we are timing an activity
+    */
+    func ChangeRingToTiming(){
         if(timerSeconds == 0){
             ring.animateStroke(0)
         }
         ringBackground.strokeColor = UIColor.TimeCrunchBlue().CGColor
-        timerLabel.textColor = UIColor.TimeCrunchBlue()
-//        timerButton.setTitle("Stop", forState: UIControlState.Normal)
         let strokeAnimation: CABasicAnimation = CABasicAnimation(keyPath: "strokeColor")
         strokeAnimation.fromValue = ringBackground.strokeColor
         strokeAnimation.toValue = UIColor.TimeCrunchBlue().CGColor
@@ -92,9 +147,10 @@ class HomeViewController: UIViewController {
         ring.hidden = false
     }
     
-    func StopActivity(){
-        timer.invalidate()
-        timerLabel.textColor = UIColor.TimeCrunchOrange()
+    /**
+    Changes the ring's UI to show that we've stopped timing
+    */
+    func ChangeRingToStopped(){
         ring.hidden = true
         ring.removeAllAnimations()
         ring.strokeStart = 0.0
@@ -105,30 +161,6 @@ class HomeViewController: UIViewController {
         strokeAnimation.duration = 0.25
         ringBackground.addAnimation(strokeAnimation, forKey: nil)
         performSelector("ChangeRingColor", withObject: nil, afterDelay: 0.22)
-    }
-    
-    func IncrementTime(){
-        print("Increment time \(timerSeconds)")
-        timerSeconds++
-        ring.animateStroke(timerSeconds)
-        //Make the minutes into a displayable version
-        let timerMinutes = timerSeconds / 60
-        var minutesString = "\(timerMinutes)"
-        if(timerMinutes < 10){
-            minutesString = "0\(minutesString)"
-        }
-        
-        //Make the seconds into a displayable version
-        let secondsMinusMinutes = timerSeconds % 60
-        var secondsString = "\(secondsMinusMinutes)"
-        if(secondsMinusMinutes < 10){
-            secondsString = "0\(secondsMinusMinutes)"
-        }
-        timerLabel.text = "\(minutesString):\(secondsString)"
-    }
-    
-    func TimerDown(){
-       timerButton.backgroundColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0 , alpha: 1.0)
     }
 
     
