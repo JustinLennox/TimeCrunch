@@ -13,7 +13,6 @@ class HomeViewController: UIViewController {
     
     let addActivityButton = UIButton()
     let timerButton = UIButton()
-    let shadowView = UIView()
     let timerLabel = UILabel()
     var timer = NSTimer()
     var timing = false
@@ -25,16 +24,16 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    //MARK: - UI
+    
+    func AddUI(){
         timerButton.frame = CGRectMake(view.frame.width * 0.25, view.frame.height * 0.15, view.frame.width * 0.50, self.view.frame.width * 0.50)
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
         timerButton.addTarget(self, action: "TimerDown", forControlEvents: .TouchDown)
         timerButton.addTarget(self, action: "TimerPressed", forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(timerButton)
-        
-        shadowView.frame = CGRectMake(timerButton.frame.origin.x + 10, timerButton.frame.origin.y + 10, timerButton.frame.width-20, timerButton.frame.width - 20)
-        shadowView.layer.cornerRadius = shadowView.frame.width/2
-        shadowView.alpha = 0.0
-        view.addSubview(shadowView)
         
         timerLabel.frame = CGRectMake(view.frame.width * 0.25, CGRectGetMidY(timerButton.frame) - view.frame.height * 0.05, view.frame.width * 0.50, view.frame.height * 0.10)
         timerLabel.text = "00:00"
@@ -58,7 +57,7 @@ class HomeViewController: UIViewController {
         addActivityButton.addTarget(self, action: "AddActivityPressed", forControlEvents: UIControlEvents.TouchUpInside)
         addActivityButton.layer.cornerRadius = 8.0
         view.addSubview(addActivityButton)
-    
+        
     }
     
     func AddActivityPressed(){
@@ -66,7 +65,7 @@ class HomeViewController: UIViewController {
     }
     
     func TimerPressed(){
-        shadowView.alpha = 0.0
+        timerButton.backgroundColor = UIColor.whiteColor()
         if(!timing){
             timing = true
             StartActivity()
@@ -129,18 +128,7 @@ class HomeViewController: UIViewController {
     }
     
     func TimerDown(){
-        if(timing){
-            ringBackground.strokeColor = UIColor.TimeCrunchOrange().CGColor
-        }else{
-            ringBackground.strokeColor = UIColor.TimeCrunchBlue().CGColor
-        }
-        shadowView.alpha = 1.0
-        shadowView.backgroundColor = UIColor.whiteColor()
-        shadowView.layer.shadowColor = UIColor.blackColor().CGColor
-        shadowView.layer.masksToBounds = false
-        shadowView.layer.shadowOpacity = 0.5
-        shadowView.layer.shadowRadius = 5.0
-        shadowView.layer.shadowOffset = CGSize(width: -5, height: -5)
+       timerButton.backgroundColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0 , alpha: 1.0)
     }
 
     
