@@ -112,8 +112,8 @@
 			children = (
 				D0FCB6341CA209510020FCE4 /* AppDelegate.swift */,
 				D0FCB6361CA209510020FCE4 /* HomeViewController.swift */,
-				D051EDE41CB3581A006E3E36 /* AddActivityViewController.swift */,
 				D051EDE21CB353C4006E3E36 /* ActivityTableCell.swift */,
+				D051EDE41CB3581A006E3E36 /* AddActivityViewController.swift */,
 				D0FCB6CB1CA617530020FCE4 /* RingLayer.swift */,
 				D0FCB6C91CA6109D0020FCE4 /* CustomColors.swift */,
 				D0FCB6381CA209510020FCE4 /* Main.storyboard */,

@@ -29,6 +29,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var ringBackground = RingLayer()
     
     let activitiesTableView = UITableView()
+    var activitiesArray = ["Brush Teeth", "Shower", "Walk the Pup"]
+    var expandedIndex = NSIndexPath()
 
     //All of the things we only need to do once
     override func viewDidLoad() {
@@ -50,7 +52,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         view.addSubview(timerButton)
         
         timerLabel.frame = CGRectMake(view.frame.width * 0.25, CGRectGetMidY(timerButton.frame) - view.frame.height * 0.05, view.frame.width * 0.50, view.frame.height * 0.10)
-        timerLabel.text = "00:00"
+        timerLabel.text = "Start"
         timerLabel.adjustsFontSizeToFitWidth = true
         timerLabel.font = UIFont.systemFontOfSize(30.0)
         timerLabel.textColor = UIColor.TimeCrunchBlue()
@@ -149,14 +151,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
      */
     func AddTableViewUI(){
         activitiesTableView.frame = CGRectMake(CGRectGetMinX(addActivityButton.frame), CGRectGetMaxY(addActivityButton.frame) + 10, addActivityButton.frame.width, view.frame.height - CGRectGetMaxY(addActivityButton.frame) - 20)
-        activitiesTableView.backgroundColor = UIColor.TimeCrunchGray()
-        activitiesTableView.separatorColor = UIColor.grayColor()
-        activitiesTableView.separatorInset = UIEdgeInsetsZero
+        activitiesTableView.backgroundColor = UIColor.TimeCrunchTableGray()
+        activitiesTableView.registerClass(ActivityTableCell.self, forCellReuseIdentifier: "ActivityCell")
+        activitiesTableView.tableFooterView = UIView()
+        activitiesTableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 5))
         activitiesTableView.layer.cornerRadius = addActivityButton.layer.cornerRadius
         activitiesTableView.delegate = self
+        activitiesTableView.separatorStyle = .None
         activitiesTableView.dataSource = self
         view.addSubview(activitiesTableView)
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -164,25 +167,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return activitiesArray.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        return 60
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let activityCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ActivityCell")
-        activityCell.backgroundColor = UIColor.TimeCrunchGray()
-        activityCell.layoutMargins = UIEdgeInsetsZero
-        activityCell.preservesSuperviewLayoutMargins = false
+        let activityCell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableCell
+        activityCell.activityTitleLabel.text = activitiesArray[indexPath.row]
         return activityCell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        for index in 0...activitiesArray.count {
+            if let activityCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? ActivityTableCell{
+                activityCell.containerView.backgroundColor = UIColor.whiteColor()
+                activityCell.activityTitleLabel.textColor = UIColor.TimeCrunchBlue()
+            }
+        }
+        
+        if let activityCell = tableView.cellForRowAtIndexPath(indexPath) as? ActivityTableCell{
+            activityCell.containerView.backgroundColor = UIColor.TimeCrunchBlue()
+            activityCell.activityTitleLabel.textColor = UIColor.whiteColor()
+        }
     }
-    
     
     //MARK: - Ring Methods (ADVANCED!)
     

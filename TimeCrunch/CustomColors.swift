@@ -34,8 +34,8 @@ extension UIColor {
         return UIColor(red: 26.0/255.0, green: 188.0/255.0, blue: 156.0/255.0, alpha: 1.0)
     }
     
-    class func TimeCrunchGray() -> UIColor {
-        return UIColor(red: 189.0/255.0, green: 203.0/255.0, blue: 215.0/255.0, alpha: 1.0)
+    class func TimeCrunchTableGray() -> UIColor{
+        return UIColor(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
     }
     
     //2ecc71
