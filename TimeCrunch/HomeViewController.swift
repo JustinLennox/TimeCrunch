@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     let addActivityButton = UIButton()
@@ -27,11 +27,14 @@ class HomeViewController: UIViewController {
     /** A visual ring to display the seconds moving */
     var ring = RingLayer()
     var ringBackground = RingLayer()
+    
+    let activitiesTableView = UITableView()
 
     //All of the things we only need to do once
     override func viewDidLoad() {
         super.viewDidLoad()
         AddTimerUI()
+        AddTableViewUI()
     }
     
     //MARK: - UI
@@ -54,11 +57,11 @@ class HomeViewController: UIViewController {
         timerLabel.textAlignment = NSTextAlignment.Center
         view.addSubview(timerLabel)
         
-        ringBackground = RingLayer(x: Double(view.frame.width) * 0.25, y: Double(view.frame.height) * 0.15, width: Double(view.frame.width) * 0.50, height: Double(view.frame.width) * 0.50)
+        ringBackground = RingLayer(x: Double(view.frame.width) * 0.50, y: CGRectGetMidY(timerButton.frame), width: Double(view.frame.width) * 0.50, height: Double(view.frame.width) * 0.50)
         ringBackground.strokeColor = UIColor.TimeCrunchBeige().CGColor
         view.layer.addSublayer(ringBackground)
         
-        ring = RingLayer(x: Double(view.frame.width) * 0.25, y: Double(view.frame.height) * 0.15, width: Double(view.frame.width) * 0.50, height: Double(view.frame.width) * 0.50)
+        ring = RingLayer(x: Double(view.frame.width) * 0.50, y: CGRectGetMidY(timerButton.frame), width: Double(view.frame.width) * 0.50, height: Double(view.frame.width) * 0.50)
         view.layer.addSublayer(ring)
         ringBackground.lineWidth = ring.lineWidth
         
@@ -68,13 +71,6 @@ class HomeViewController: UIViewController {
         addActivityButton.addTarget(self, action: "AddActivityPressed", forControlEvents: UIControlEvents.TouchUpInside)
         addActivityButton.layer.cornerRadius = 8.0
         view.addSubview(addActivityButton)
-        
-    }
-    
-    /**
-    Adds the tableview UI to the app
-    */
-    func AddTableViewUI(){
         
     }
     
@@ -89,7 +85,7 @@ class HomeViewController: UIViewController {
     if we're not already, or stops timing it if we are.
     */
     func TimerPressed(){
-        timerButton.backgroundColor = UIColor.whiteColor()
+        timerButton.backgroundColor = view.backgroundColor
         if(!timing){    //Start timing the activity
             timing = true
             StartActivity()
@@ -145,6 +141,48 @@ class HomeViewController: UIViewController {
     func TimerDown(){
        timerButton.backgroundColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0 , alpha: 1.0)
     }
+    
+    //MARK: - TableView
+    
+    /**
+     Adds the tableview UI to the app
+     */
+    func AddTableViewUI(){
+        activitiesTableView.frame = CGRectMake(CGRectGetMinX(addActivityButton.frame), CGRectGetMaxY(addActivityButton.frame) + 10, addActivityButton.frame.width, view.frame.height - CGRectGetMaxY(addActivityButton.frame) - 20)
+        activitiesTableView.backgroundColor = UIColor.TimeCrunchGray()
+        activitiesTableView.separatorColor = UIColor.grayColor()
+        activitiesTableView.separatorInset = UIEdgeInsetsZero
+        activitiesTableView.layer.cornerRadius = addActivityButton.layer.cornerRadius
+        activitiesTableView.delegate = self
+        activitiesTableView.dataSource = self
+        view.addSubview(activitiesTableView)
+        
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let activityCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ActivityCell")
+        activityCell.backgroundColor = UIColor.TimeCrunchGray()
+        activityCell.layoutMargins = UIEdgeInsetsZero
+        activityCell.preservesSuperviewLayoutMargins = false
+        return activityCell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     
     //MARK: - Ring Methods (ADVANCED!)
     

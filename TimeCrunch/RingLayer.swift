@@ -13,11 +13,13 @@ class RingLayer : CAShapeLayer {
         
     }
     
-    init(x: Double, y: Double, width: Double, height: Double){
+    //startAngle: CGFloat(-M_PI_2), endAngle: CGFloat((M_PI * 2.0) - M_PI_2)
+    
+    init(x: Double, y: CGFloat, width: Double, height: Double){
         super.init()
         fillColor = UIColor.clearColor().CGColor
         lineWidth = 15.0
-        let bezPath = UIBezierPath(ovalInRect: CGRect(x: x, y: y, width: width, height: height))
+        let bezPath = UIBezierPath(arcCenter: CGPointMake(CGFloat(x), y), radius: CGFloat(width/2.0), startAngle: CGFloat(-M_PI_2), endAngle: CGFloat((M_PI * 2.0) - M_PI_2), clockwise: true)
         bezPath.lineCapStyle = .Round
         path = bezPath.CGPath
         lineCap = kCALineCapRound

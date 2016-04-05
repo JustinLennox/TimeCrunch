@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D051EDE31CB353C4006E3E36 /* ActivityTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EDE21CB353C4006E3E36 /* ActivityTableCell.swift */; };
+		D051EDE51CB3581A006E3E36 /* AddActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051EDE41CB3581A006E3E36 /* AddActivityViewController.swift */; };
 		D0FCB6351CA209510020FCE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FCB6341CA209510020FCE4 /* AppDelegate.swift */; };
 		D0FCB6371CA209510020FCE4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FCB6361CA209510020FCE4 /* HomeViewController.swift */; };
 		D0FCB63A1CA209510020FCE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FCB6381CA209510020FCE4 /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D051EDE21CB353C4006E3E36 /* ActivityTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableCell.swift; sourceTree = "<group>"; };
+		D051EDE41CB3581A006E3E36 /* AddActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddActivityViewController.swift; sourceTree = "<group>"; };
 		D0FCB6311CA209510020FCE4 /* TimeCrunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCrunch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0FCB6341CA209510020FCE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0FCB6361CA209510020FCE4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 			children = (
 				D0FCB6341CA209510020FCE4 /* AppDelegate.swift */,
 				D0FCB6361CA209510020FCE4 /* HomeViewController.swift */,
+				D051EDE41CB3581A006E3E36 /* AddActivityViewController.swift */,
+				D051EDE21CB353C4006E3E36 /* ActivityTableCell.swift */,
 				D0FCB6CB1CA617530020FCE4 /* RingLayer.swift */,
 				D0FCB6C91CA6109D0020FCE4 /* CustomColors.swift */,
 				D0FCB6381CA209510020FCE4 /* Main.storyboard */,
@@ -279,6 +285,8 @@
 				D0FCB6371CA209510020FCE4 /* HomeViewController.swift in Sources */,
 				D0FCB6CA1CA6109D0020FCE4 /* CustomColors.swift in Sources */,
 				D0FCB6351CA209510020FCE4 /* AppDelegate.swift in Sources */,
+				D051EDE51CB3581A006E3E36 /* AddActivityViewController.swift in Sources */,
+				D051EDE31CB353C4006E3E36 /* ActivityTableCell.swift in Sources */,
 				D0FCB6CC1CA617530020FCE4 /* RingLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

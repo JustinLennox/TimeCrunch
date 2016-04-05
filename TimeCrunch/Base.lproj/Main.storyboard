@@ -16,21 +16,21 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="TimeCrunch" id="HeB-Ug-avT"/>
                     <connections>
-                        <segue destination="DG0-Ts-5ax" kind="presentation" identifier="AddActivitySegue" id="hf6-9t-1ab"/>
+                        <segue destination="DG0-Ts-5ax" kind="show" identifier="AddActivitySegue" id="hf6-9t-1ab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="998" y="272"/>
         </scene>
-        <!--Old View Controller-->
+        <!--Add Activity View Controller-->
         <scene sceneID="Q3W-5T-LWp">
             <objects>
-                <viewController id="DG0-Ts-5ax" customClass="OldViewController" customModule="TimeCrunch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddActivityViewController" id="DG0-Ts-5ax" customClass="AddActivityViewController" customModule="TimeCrunch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M22-ih-pZt"/>
                         <viewControllerLayoutGuide type="bottom" id="gIh-Fm-By4"/>
@@ -40,6 +40,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.090196078430000007" green="0.69019607839999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="jrm-HX-QK1"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r53-8F-qeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
