@@ -11,24 +11,35 @@ import QuartzCore
 
 class HomeViewController: UIViewController {
     
+    
     let addActivityButton = UIButton()
+    /** The invisible button over the timer that starts and stops activities */
     let timerButton = UIButton()
+    /** Label that displays the time the activity is taking */
     let timerLabel = UILabel()
+    /** The NSTimer that keeps track of the time the activity is taking */
     var timer = NSTimer()
+    /** A boolean flag indicating whether we're timing an activity or not */
     var timing = false
+    /** The number of seconds the activity has taken so far */
     var timerSeconds = 0
+    
+    /** A visual ring to display the seconds moving */
     var ring = RingLayer()
     var ringBackground = RingLayer()
 
     //All of the things we only need to do once
     override func viewDidLoad() {
         super.viewDidLoad()
-        AddUI()
+        AddTimerUI()
     }
     
     //MARK: - UI
     
-    func AddUI(){
+    /**
+    Adds the timer button, label, ring, and add activity button UI to the app.
+    */
+    func AddTimerUI(){
         timerButton.frame = CGRectMake(view.frame.width * 0.25, view.frame.height * 0.15, view.frame.width * 0.50, self.view.frame.width * 0.50)
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
         timerButton.addTarget(self, action: "TimerDown", forControlEvents: .TouchDown)
@@ -57,6 +68,13 @@ class HomeViewController: UIViewController {
         addActivityButton.addTarget(self, action: "AddActivityPressed", forControlEvents: UIControlEvents.TouchUpInside)
         addActivityButton.layer.cornerRadius = 8.0
         view.addSubview(addActivityButton)
+        
+    }
+    
+    /**
+    Adds the tableview UI to the app
+    */
+    func AddTableViewUI(){
         
     }
     
@@ -128,7 +146,7 @@ class HomeViewController: UIViewController {
        timerButton.backgroundColor = UIColor(red: 204.0/255.0, green: 204.0/255.0, blue: 204.0/255.0 , alpha: 1.0)
     }
     
-    //MARK: - Ring Methods
+    //MARK: - Ring Methods (ADVANCED!)
     
     /**
     Changes the ring's UI to show that we are timing an activity
