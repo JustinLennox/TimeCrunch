@@ -33,7 +33,6 @@ class RingLayer : CAShapeLayer {
         let strokeAnimation: CABasicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         strokeAnimation.fromValue = seconds > 0 ? Float(seconds) / 60.0 : 0
         strokeAnimation.toValue = seconds > 0 ? Float(seconds + 1) / 60.0 : 0.0166667
-        print("Animate from \(strokeAnimation.fromValue) to \(strokeAnimation.toValue)")
         strokeAnimation.duration = 1.1
         addAnimation(strokeAnimation, forKey: nil)
     }

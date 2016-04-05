@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="998" y="272"/>
         </scene>
-        <!--View Controller-->
+        <!--Old View Controller-->
         <scene sceneID="Q3W-5T-LWp">
             <objects>
-                <viewController id="DG0-Ts-5ax" sceneMemberID="viewController">
+                <viewController id="DG0-Ts-5ax" customClass="OldViewController" customModule="TimeCrunch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M22-ih-pZt"/>
                         <viewControllerLayoutGuide type="bottom" id="gIh-Fm-By4"/>
