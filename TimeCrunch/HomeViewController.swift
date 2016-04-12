@@ -11,7 +11,7 @@ import QuartzCore
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
+    /**This is a documentation comment */
     let addActivityButton = UIButton()
     /** The invisible button over the timer that starts and stops activities */
     let timerButton = UIButton()
@@ -29,8 +29,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var ringBackground = RingLayer()
     
     let activitiesTableView = UITableView()
-    var activitiesArray = ["Brush Teeth", "Shower", "Walk the Pup"]
-    var expandedIndex = NSIndexPath()
+    var activitiesArray = ["Hi", "What's", "Sup", "Hello"]
 
     //All of the things we only need to do once
     override func viewDidLoad() {
@@ -48,7 +47,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         timerButton.frame = CGRectMake(view.frame.width * 0.25, view.frame.height * 0.15, view.frame.width * 0.50, self.view.frame.width * 0.50)
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
         timerButton.addTarget(self, action: "TimerDown", forControlEvents: .TouchDown)
-        timerButton.addTarget(self, action: "TimerPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        timerButton.addTarget(self, action: "TimerPressed", forControlEvents: .TouchUpInside)
         view.addSubview(timerButton)
         
         timerLabel.frame = CGRectMake(view.frame.width * 0.25, CGRectGetMidY(timerButton.frame) - view.frame.height * 0.05, view.frame.width * 0.50, view.frame.height * 0.10)
@@ -69,7 +68,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         addActivityButton.frame = CGRectMake(view.frame.width * 0.05, CGRectGetMaxY(timerButton.frame) + view.frame.height * 0.05, view.frame.width * 0.90, self.view.frame.height * 0.08)
         addActivityButton.backgroundColor = UIColor.TimeCrunchBlue()
-        addActivityButton.setTitle("Add an Activity", forState: UIControlState.Normal)
+        addActivityButton.setTitle("Estimated Time", forState: UIControlState.Normal)
         addActivityButton.addTarget(self, action: "AddActivityPressed", forControlEvents: UIControlEvents.TouchUpInside)
         addActivityButton.layer.cornerRadius = 8.0
         view.addSubview(addActivityButton)
@@ -167,21 +166,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activitiesArray.count
+        return activitiesArray.count + 1
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 60
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let activityCell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableCell
-        activityCell.activityTitleLabel.text = activitiesArray[indexPath.row]
-        return activityCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {   //  3
+        if(indexPath.row == activitiesArray.count){
+            let addActivityCell = tableView.dequeueReusableCellWithIdentifier("ActivityCell")! as! ActivityTableCell
+            addActivityCell.containerView.backgroundColor = UIColor.TimeCrunchBlue()
+            addActivityCell.activityTitleLabel.textColor = UIColor.whiteColor()
+            addActivityCell.activityTitleLabel.textAlignment = .Center
+            addActivityCell.activityTitleLabel.text = "Add an Activity"
+            return addActivityCell
+        }else{
+            let activityCell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableCell
+            activityCell.activityTitleLabel.text = activitiesArray[indexPath.row]
+            return activityCell
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        for index in 0...activitiesArray.count {
+        if(indexPath.row == activitiesArray.count){
+            performSegueWithIdentifier("AddActivitySegue", sender: self)
+            return
+        }
+        for index in 0...activitiesArray.count - 1 {
             if let activityCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as? ActivityTableCell{
                 activityCell.containerView.backgroundColor = UIColor.whiteColor()
                 activityCell.activityTitleLabel.textColor = UIColor.TimeCrunchBlue()

@@ -14,11 +14,12 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="TimeCrunch" id="HeB-Ug-avT"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <segue destination="DG0-Ts-5ax" kind="show" identifier="AddActivitySegue" id="hf6-9t-1ab"/>
                     </connections>
@@ -36,10 +37,11 @@
                         <viewControllerLayoutGuide type="bottom" id="gIh-Fm-By4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sb8-y4-wSY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.090196078430000007" green="0.69019607839999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="jrm-HX-QK1"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r53-8F-qeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -51,9 +53,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h1n-Cs-r5E" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yz2-g6-A52">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Yz2-g6-A52">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.090196078430000007" green="0.69019607839999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="26"/>
