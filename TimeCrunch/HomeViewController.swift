@@ -12,7 +12,7 @@ import QuartzCore
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     /**This is a documentation comment */
-    let addActivityButton = UIButton()
+    let estimatedTimeLabel = UIButton()
     /** The invisible button over the timer that starts and stops activities */
     let timerButton = UIButton()
     /** Label that displays the time the activity is taking */
@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     Adds the timer button, label, ring, and add activity button UI to the app.
     */
     func AddTimerUI(){
-        timerButton.frame = CGRectMake(view.frame.width * 0.25, view.frame.height * 0.15, view.frame.width * 0.50, self.view.frame.width * 0.50)
+        timerButton.frame = CGRectMake(view.frame.width * 0.25, view.frame.height * 0.07, view.frame.width * 0.50, self.view.frame.width * 0.50)
         timerButton.layer.cornerRadius = timerButton.frame.width / 2
         timerButton.addTarget(self, action: "TimerDown", forControlEvents: .TouchDown)
         timerButton.addTarget(self, action: "TimerPressed", forControlEvents: .TouchUpInside)
@@ -66,12 +66,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         view.layer.addSublayer(ring)
         ringBackground.lineWidth = ring.lineWidth
         
-        addActivityButton.frame = CGRectMake(view.frame.width * 0.05, CGRectGetMaxY(timerButton.frame) + view.frame.height * 0.05, view.frame.width * 0.90, self.view.frame.height * 0.08)
-        addActivityButton.backgroundColor = UIColor.TimeCrunchBlue()
-        addActivityButton.setTitle("Estimated Time", forState: UIControlState.Normal)
-        addActivityButton.addTarget(self, action: "AddActivityPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        addActivityButton.layer.cornerRadius = 8.0
-        view.addSubview(addActivityButton)
+        estimatedTimeLabel.frame = CGRectMake(view.frame.width * 0.05, CGRectGetMaxY(timerButton.frame) + view.frame.height * 0.05, view.frame.width * 0.90, self.view.frame.height * 0.08)
+        estimatedTimeLabel.backgroundColor = UIColor.TimeCrunchBlue()
+        estimatedTimeLabel.titleLabel?.font = UIFont.systemFontOfSize(18.0, weight: 0.3)
+        estimatedTimeLabel.setTitle("Estimated Time", forState: UIControlState.Normal)
+        estimatedTimeLabel.layer.cornerRadius = 8.0
+        view.addSubview(estimatedTimeLabel)
         
     }
     
@@ -153,13 +153,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
      Adds the tableview UI to the app
      */
     func AddTableViewUI(){
-        activitiesTableView.frame = CGRectMake(CGRectGetMinX(addActivityButton.frame), CGRectGetMaxY(addActivityButton.frame) + 10, addActivityButton.frame.width, view.frame.height - CGRectGetMaxY(addActivityButton.frame) - 84)
-        print("Height: \(view.frame.height) max button y:\(CGRectGetMaxY(addActivityButton.frame))")
+        activitiesTableView.frame = CGRectMake(CGRectGetMinX(estimatedTimeLabel.frame), CGRectGetMaxY(estimatedTimeLabel.frame) + 10, estimatedTimeLabel.frame.width, view.frame.height - CGRectGetMaxY(estimatedTimeLabel.frame) - 84)
+        print("Height: \(view.frame.height) max button y:\(CGRectGetMaxY(estimatedTimeLabel.frame))")
         activitiesTableView.backgroundColor = UIColor.TimeCrunchTableGray()
         activitiesTableView.registerClass(ActivityTableCell.self, forCellReuseIdentifier: "ActivityCell")
-        activitiesTableView.tableFooterView = UIView()
+        activitiesTableView.tableFooterView = UIView(frame: CGRectMake(0, 0, 0, 5))
         activitiesTableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 5))
-        activitiesTableView.layer.cornerRadius = addActivityButton.layer.cornerRadius
+        activitiesTableView.layer.cornerRadius = estimatedTimeLabel.layer.cornerRadius
         activitiesTableView.delegate = self
         activitiesTableView.separatorStyle = .None
         activitiesTableView.dataSource = self
@@ -209,6 +209,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             activityCell.containerView.backgroundColor = UIColor.TimeCrunchBlue()
             activityCell.activityTitleLabel.textColor = UIColor.whiteColor()
         }
+    }
+    
+    //MARK: - Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationItem.backBarButtonItem = backButton
     }
     
     //MARK: - Ring Methods (ADVANCED!)

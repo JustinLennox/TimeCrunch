@@ -12,11 +12,19 @@ class AddActivityViewController: UIViewController, UITableViewDataSource, UITabl
     
     let addActivityTableView = UITableView()
     let addActivityTextField = UITextField()
-    let activitiesArray = ["Walk da Dog", "Take a Bath", "I don't know"]
+    var activitiesArray = ["Walk the dog", "Take out the trash"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
+
+        addActivityTextField.placeholder = "Enter a new activity"
+        addActivityTextField.font = UIFont.systemFontOfSize(16.0, weight: 0.4)
+        addActivityTextField.textColor = UIColor.TimeCrunchBlue()
+        addActivityTextField.tintColor = UIColor.TimeCrunchBlue()
+        addActivityTextField.delegate = self
+        addActivityTextField.returnKeyType = .Done
+        view.addSubview(addActivityTextField)
         
         addActivityTableView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         addActivityTableView.dataSource = self
@@ -28,13 +36,9 @@ class AddActivityViewController: UIViewController, UITableViewDataSource, UITabl
         addActivityTableView.backgroundColor = UIColor.TimeCrunchTableGray()
         addActivityTableView.allowsMultipleSelection = true
         view.addSubview(addActivityTableView)
-        
-        addActivityTextField.placeholder = "Enter a new activity"
-        addActivityTextField.font = UIFont.systemFontOfSize(16.0, weight: 0.4)
-        addActivityTextField.textColor = UIColor.TimeCrunchBlue()
-        addActivityTextField.tintColor = UIColor.TimeCrunchBlue()
-        addActivityTextField.delegate = self
-        addActivityTextField.returnKeyType = .Done
+        addActivityTableView.setNeedsLayout()
+        addActivityTableView.layoutIfNeeded()
+        addActivityTableView.reloadData()
     }
     
     //MARK: - Table View Methods
@@ -54,8 +58,7 @@ class AddActivityViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if(indexPath.row == 0){
             let activityCell = tableView.dequeueReusableCellWithIdentifier("ActivityCell") as! ActivityTableCell
-            
-            addActivityTextField.frame = CGRectMake(activityCell.frame.width * 0.05, activityCell.frame.height * 0.25, activityCell.frame.width, activityCell.frame.height)
+            addActivityTextField.frame = CGRectMake(activityCell.containerView.frame.origin.x + 5, activityCell.containerView.frame.origin.y, activityCell.containerView.frame.width - 5, activityCell.containerView.frame.height)
             activityCell.addSubview(addActivityTextField)
             return activityCell
         }else{
@@ -67,7 +70,10 @@ class AddActivityViewController: UIViewController, UITableViewDataSource, UITabl
     
     //MARK: Text Field Methods
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if let activityTitle = textField.text {
+            addActivityTextField.text = ""
+        }
         addActivityTextField.resignFirstResponder()
-        return true
+        return false
     }
 }
