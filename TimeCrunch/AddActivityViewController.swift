@@ -21,10 +21,12 @@ class AddActivityViewController: UIViewController, UITableViewDataSource, UITabl
         addActivityTableView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         addActivityTableView.dataSource = self
         addActivityTableView.delegate = self
+        addActivityTableView.separatorStyle = .None
         addActivityTableView.tableFooterView = UIView()
         addActivityTableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, 0, 5))
         addActivityTableView.registerClass(ActivityTableCell.self, forCellReuseIdentifier: "ActivityCell")
         addActivityTableView.backgroundColor = UIColor.TimeCrunchTableGray()
+        addActivityTableView.allowsMultipleSelection = true
         view.addSubview(addActivityTableView)
         
         addActivityTextField.placeholder = "Enter a new activity"

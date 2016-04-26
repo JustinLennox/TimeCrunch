@@ -100,6 +100,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     Starts timing the activity
     */
     func StartActivity(){
+        if timerLabel.text == "Start" {
+            timerLabel.text = "00:00"
+        }
+
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "IncrementTime", userInfo: nil, repeats: true)
         timerLabel.textColor = UIColor.TimeCrunchBlue()
         ChangeRingToTiming()
@@ -149,7 +153,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
      Adds the tableview UI to the app
      */
     func AddTableViewUI(){
-        activitiesTableView.frame = CGRectMake(CGRectGetMinX(addActivityButton.frame), CGRectGetMaxY(addActivityButton.frame) + 10, addActivityButton.frame.width, view.frame.height - CGRectGetMaxY(addActivityButton.frame) - 20)
+        activitiesTableView.frame = CGRectMake(CGRectGetMinX(addActivityButton.frame), CGRectGetMaxY(addActivityButton.frame) + 10, addActivityButton.frame.width, view.frame.height - CGRectGetMaxY(addActivityButton.frame) - 84)
+        print("Height: \(view.frame.height) max button y:\(CGRectGetMaxY(addActivityButton.frame))")
         activitiesTableView.backgroundColor = UIColor.TimeCrunchTableGray()
         activitiesTableView.registerClass(ActivityTableCell.self, forCellReuseIdentifier: "ActivityCell")
         activitiesTableView.tableFooterView = UIView()
